@@ -1,0 +1,53 @@
+
+<div class="flexDiv">
+
+<button mat-raised-button color="primary" (click)="openDialog(form, 'add')">Add Item</button>
+<button mat-raised-button color="primary" (click)="openDialog(form, 'remove')">Remove Item</button>
+<button mat-raised-button color="primary" (click)="openDialog(form, 'return')">Return Item</button>
+
+
+</div>
+<div class="flexDiv">
+  <mat-card class="example-card" *ngFor="let item of techItems$ | async">
+    <mat-card-header>
+      <mat-card-title>{{item.name}}</mat-card-title>
+    </mat-card-header>
+     <mat-card-content>
+      <p>
+        Value: {{item.value}}
+      </p>
+      <p>
+        Quantity: {{item.quantity}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+
+<ng-template #form>
+  <form class="example-form">
+    <mat-form-field >
+      <input matInput required placeholder="Name" [(ngModel)]="newItem.name" name="name" #name="ngModel">
+    </mat-form-field>
+  
+    <mat-form-field >
+      <input matInput required  placeholder="Value" type="number" [(ngModel)]="newItem.value" name="value" min="1"  #value="ngModel">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput required  placeholder="Quantity" type="number" [(ngModel)]="newItem.quantity" name="quantity" min="1"  #quantity="ngModel">
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button type="button" mat-dialog-close >Cancel</button>
+      <button 
+        mat-button type="button"
+        color="primary" 
+        mat-dialog-close 
+        cdkFocusInitial 
+        (click)="operateItem()"
+        [disabled]= "operation != 'remove' ? (!name.valid || !value.valid || !quantity.valid): (!name.valid || !quantity.valid)"
+        >{{operation}}</button>
+    </div>
+  </form>
+  </ng-template>

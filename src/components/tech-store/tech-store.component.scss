@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+
+
+    mat-form-field {
+      width: 68%;
+    }
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+
+  .example-card {
+    width: 8rem;
+    height: 8rem;
+    margin: 1rem 0.5rem;
+    text-align: center;
+  }
+  
+
+  .flexDiv {
+    display: flex;
+    /* vertical-align: middle; */
+    align-content: space-around;
+    align-items: center;
+    justify-content: center;
+
+    mat-card-header {
+      
+      flex-direction: column;
+      color: mat-color( mat-palette($mat-indigo));
+
+      }
+  
+
+    button {
+      margin: 0 1rem 1rem 0;
+    }
+
+   
+  }
