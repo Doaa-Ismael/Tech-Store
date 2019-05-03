@@ -18,6 +18,7 @@ export class TechStoreComponent implements OnInit {
   techItems$: Observable<TechItem[]>;
   newItem: TechItem;
   operation: string;
+  
   constructor(
     private techStroe: Store<{ techStore: TechStoreState }>,
     public dialog: MatDialog) {
@@ -40,12 +41,9 @@ export class TechStoreComponent implements OnInit {
   openDialog(formElem, operation): void {
     this.operation = operation;
     const dialogRef = this.dialog.open(formElem, {
-      width: '50%'
+      width: '35%'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   operateItem() {

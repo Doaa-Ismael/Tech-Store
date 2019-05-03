@@ -3,14 +3,15 @@ import { techStroeActions } from './techStore.actions'
 
 
 export function Reducer  (state: TechStoreState = initialState, action): TechStoreState {
-    console.log("ACTION: ", action)
+    console.log("ACTION: ", action);
+
     let newState = {...state};
-    let done = false;
     switch(action.type) {
         // ADD OR RETURN ITEMS
         case techStroeActions.Return_Item:
-        case techStroeActions.Add_Item:
-            newState.items = newState.items.map(item => {
+        case techStroeActions.Add_Item: // O(n)
+            let done = false;
+            newState.items = newState.items.map(item => { 
                 if(item.name == action.payload.name && item.value == action.payload.value) {
                     item.quantity += action.payload.quantity;
                     done = true;
@@ -24,28 +25,27 @@ export function Reducer  (state: TechStoreState = initialState, action): TechSto
 
         case techStroeActions.Remove_Item: // Quantity and Name Only
             let quantity = action.payload.quantity;
-            console.log("Items before ", newState.items);
-            let items = newState.items.map(item => {
+            let items = [ ...newState.items ];
+            newState.items = [];
+
+            // O(n)
+            let deleted: boolean;
+            items.map(item => {
+                deleted = false;
                 if(quantity > 0 && item.name == action.payload.name) {
                     if(item.quantity >= quantity) {
                         item.quantity -= quantity;
                         quantity = 0;
-                        if(item.quantity == 0)
-                            return undefined;
+                        if(item.quantity == 0) 
+                            deleted = true;
                     }
                     else {
                         quantity -= item.quantity;
-                        return undefined;
+                        deleted = true;
                     }
                 }
-                return item;
-            })
-            console.log("Items after ", items);
-            newState.items = [];
-            items.map(item => {
-                if(item != undefined) {
+                if(!deleted)
                     newState.items.push(item);
-                }
             })
             return newState;
 
