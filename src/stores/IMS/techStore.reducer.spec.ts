@@ -1,14 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { async, TestBed } from '@angular/core/testing';
 import { StoreModule, Store } from '@ngrx/store';
 import { Reducer } from 'src/stores/IMS/techStore.reducer';
 import { TechStoreState } from 'src/stores/IMS/techStore.state';
+import { techStroeActions } from './techStore.actions';
 
-describe('TechStoreComponent', () => {
+describe('Reducer', () => {
 
   let store: Store<{ techStore: TechStoreState }>
+  let payload = {name: 'G', value: 4, quantity: 5};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,10 +24,25 @@ describe('TechStoreComponent', () => {
 
   });
 
-  it('should create', () => {
-
+  it('should have the new item to be added', () => {
+    const state = { items: [] };
+    const action = { type: techStroeActions.Add_Item, payload };
+    expect(Reducer(state, action)).toEqual({items: [ payload ]});
   });
 
+  it('should have the new item to be removed', () => { 
+    const state = { items: [ payload ] };
+    const action = { type: techStroeActions.Remove_Item, payload };
+    expect(Reducer(state, action)).toEqual({items: [ ]});
+  });
+
+  it('should have the item to be updated', () => { 
+    payload = {name: 'G', value: 4, quantity: 5};
+    const state = { items: [ payload ] };
+    const action = { type: techStroeActions.Return_Item, payload };
+
+    expect(Reducer(state, action)).toEqual({items: [ { ...payload, quantity: 10 } ]});
+  });
 
   
 });

@@ -35,9 +35,6 @@ export class TechStoreComponent implements OnInit {
   ngOnInit() {
   }
 
-
-
-
   openDialog(formElem, operation): void {
     this.operation = operation;
     const dialogRef = this.dialog.open(formElem, {
@@ -59,6 +56,7 @@ export class TechStoreComponent implements OnInit {
       quantity: null,
       name: ''
     }
+    
   }
 
 

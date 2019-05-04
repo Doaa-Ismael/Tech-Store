@@ -3,9 +3,9 @@ import { techStroeActions } from './techStore.actions'
 
 
 export function Reducer  (state: TechStoreState = initialState, action): TechStoreState {
-    console.log("ACTION: ", action);
 
     let newState = {...state};
+
     switch(action.type) {
         // ADD OR RETURN ITEMS
         case techStroeActions.Return_Item:
