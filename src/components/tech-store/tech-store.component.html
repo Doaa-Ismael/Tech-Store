@@ -32,8 +32,8 @@
       <input matInput required placeholder="Name" [(ngModel)]="newItem.name" name="name" #name="ngModel">
     </mat-form-field>
   
-    <mat-form-field >
-      <input matInput required  placeholder="Value" type="number" [(ngModel)]="newItem.value" name="value" min="1"  #value="ngModel">
+    <mat-form-field *ngIf="operation != 'remove'">
+      <input matInput required  placeholder="Value" type="number" [(ngModel)]="newItem.value" name="value" min="1"  #iValue="ngModel">
     </mat-form-field>
     <mat-form-field >
       <input matInput required  placeholder="Quantity" type="number" [(ngModel)]="newItem.quantity" name="quantity" min="1"  #quantity="ngModel">
@@ -46,7 +46,7 @@
         mat-dialog-close 
         cdkFocusInitial 
         (click)="operateItem()"
-        [disabled]= "operation != 'remove' ? (!name.valid || !value.valid || !quantity.valid): (!name.valid || !quantity.valid)"
+        [disabled]= " iValue ? ( !name.valid || !iValue.valid || !quantity.valid) : (!name.valid || !quantity.valid)"
         >{{operation}}</button>
     </div>
   </form>

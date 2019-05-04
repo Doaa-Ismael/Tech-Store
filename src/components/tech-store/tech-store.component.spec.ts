@@ -71,7 +71,7 @@ describe('TechStoreComponent', () => {
     }
     operation('add');
     expect(numberOfItemsAfter - numberOfItemsbefore).toBe(1);
-    //clearOperation('remove');
+    clearOperation('remove');
 
   });
 
@@ -82,13 +82,8 @@ describe('TechStoreComponent', () => {
       quantity: 10
     }
     operation('add');
-    console.log("DDDDDDDDDD", allItems);
-  //  let updatedQuantity = allItems.filter((item) => item.name == component.newItem.name);
-    //console.log("DDDDDDDDDD", updatedQuantity);
-
     expect(numberOfItemsAfter - numberOfItemsbefore).toBe(1);
-    //expect(updatedQuantity).toBe(10);
-    //clearOperation('remove');
+    clearOperation('remove');
 
   });
 
@@ -100,7 +95,7 @@ describe('TechStoreComponent', () => {
     }
     operation('remove');
     expect(numberOfItemsbefore - numberOfItemsAfter).toBe(1);
-    //clearOperation('add');
+    clearOperation('add');
   });
 
   it('should return element to store', () => {
@@ -111,7 +106,7 @@ describe('TechStoreComponent', () => {
     }
     operation('return');
     expect(numberOfItemsAfter - numberOfItemsbefore).toBe(1);
-    //clearOperation('remove');
+    clearOperation('remove');
 
   });
 
